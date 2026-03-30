@@ -6,6 +6,7 @@ package br.edu.eti.OSApiApplication.api.controller;
 
 import br.edu.eti.OSApiApplication.domain.model.Cliente;
 import br.edu.eti.OSApiApplication.domain.repository.ClienteRepository;
+import br.edu.eti.OSApiApplication.domain.service.ClienteService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.Valid;
@@ -33,6 +34,9 @@ public class ClienteController {
 
     @Autowired
     private ClienteRepository clienteRepository;
+    
+    @Autowired
+    private ClienteService clienteService;
 
     @GetMapping("/clientes")
     public ResponseEntity<List<Cliente>> listarTodos() {
@@ -60,7 +64,7 @@ public class ClienteController {
         
         System.out.println(cliente.getFone());
         
-        return clienteRepository.save(cliente);
+        return clienteService.salvar(cliente);
 
     }
 
@@ -75,7 +79,7 @@ public class ClienteController {
         }
 
         cliente.setId(clienteID);
-        cliente = clienteRepository.save(cliente);
+        cliente = clienteService.salvar(cliente);
         return ResponseEntity.ok(cliente);
 
     }
@@ -88,8 +92,7 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
 
-        clienteRepository.deleteById(clienteID);
-
+        clienteService.excluir(clienteID);
         return ResponseEntity.noContent().build();
 
     }
