@@ -1,18 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.edu.eti.OSApiApplication.domain.repository;
 
 import br.edu.eti.OSApiApplication.domain.model.OrdemServico;
-import java.util.List;
+import br.edu.eti.OSApiApplication.domain.model.StatusOrdemServico;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
 
-/**
- *
- * @author digma
- */
-public interface OrdemServicoRepository extends JpaRepository<OrdemServico, Long>{
-    
-    
+@Repository
+public interface OrdemServicoRepository extends JpaRepository<OrdemServico, Long> {
+
+    // Busca buscando a propriedade 'id' de dentro do objeto 'cliente'
+    List<OrdemServico> findByClienteId(Long clienteId);
+
+    // 1 e 2. Listar OS por cliente e status
+    List<OrdemServico> findByClienteIdAndStatus(Long clienteId, StatusOrdemServico status);
+
+    // 3. Listar todas as OS Com e Sem Comentários
+    List<OrdemServico> findByComentariosIsNotEmpty();
+    List<OrdemServico> findByComentariosIsEmpty();
+
+    // 4 e 5. Listar por Status Com e Sem Comentários
+    List<OrdemServico> findByStatusAndComentariosIsNotEmpty(StatusOrdemServico status);
+    List<OrdemServico> findByStatusAndComentariosIsEmpty(StatusOrdemServico status);
 }

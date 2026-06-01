@@ -4,10 +4,14 @@
  */
 package br.edu.eti.OSApiApplication.domain.dto;
 
+import br.edu.eti.OSApiApplication.domain.model.StatusOrdemServico;
+import jakarta.validation.constraints.NotNull;
+
 /**
  *
  * @author digma
  */
-public record AtualizaStatusDTO() {
-
-}
+public record AtualizaStatusDTO(
+        @NotNull(message = "Status é obrigatório")
+        StatusOrdemServico status) 
+{}

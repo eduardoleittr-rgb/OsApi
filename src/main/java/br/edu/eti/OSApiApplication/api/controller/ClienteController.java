@@ -7,6 +7,7 @@ package br.edu.eti.OSApiApplication.api.controller;
 import br.edu.eti.OSApiApplication.domain.model.Cliente;
 import br.edu.eti.OSApiApplication.domain.repository.ClienteRepository;
 import br.edu.eti.OSApiApplication.domain.service.ClienteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.Valid;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author digma
  */
+@SecurityRequirement(name = "ApiKeyAuth")
 @RestController
 public class ClienteController {
 
